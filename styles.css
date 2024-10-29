@@ -1,0 +1,28 @@
+
+        body{
+            margin:auto 30px;
+        }
+        
+        .card-img-top {
+          height: 150px;
+          object-fit: cover; 
+        }
+        .card{
+            width:18rem;
+        }
+        .container1{
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        #city-icon{
+            width:200px;
+        }
+        #weather-icon{
+            width:100px;
+        }
+      .card-main{
+        width: 24rem;
+      }

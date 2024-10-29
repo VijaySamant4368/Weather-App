@@ -57,6 +57,74 @@ for (const city of cities){
     tableBody.insertAdjacentHTML("beforeend", row);
 }
 }
-document.addEventListener("DOMContentLoaded", () => {
-    tableData();
-});
+
+
+
+async function getCityImage(city) {
+    const extensions = ['jpg', 'jpeg', 'png'];
+    let imagePath;
+
+    for (let ext of extensions) {
+        imagePath = `assets/${city}.${ext}`;
+        
+        // Attempt to load the image by setting it as the source
+        const img = document.getElementById('city-icon');
+        img.src = imagePath;
+
+        // Wait for the image to load or fail
+        const imageLoaded = await new Promise((resolve) => {
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+        });
+
+        // If image loaded successfully, return the path
+        if (imageLoaded) return imagePath;
+    }
+
+    // Fallback image if no matching file found
+    return 'assets/default.jpg';
+}
+
+
+async function loadCityDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const city = urlParams.get('city');
+
+    if (city) {
+        const data = await getWeather(city);
+        if (data) {
+            document.getElementById('city-name').innerText = city;
+            document.getElementById('temp').innerText = `${data.current.temp_c}`;
+            document.getElementById('humidity').innerText = `${data.current.humidity}`;
+            document.getElementById('wind').innerText = `${data.current.wind_mph}`;
+            document.getElementById('pressure').innerText = `${data.current.pressure_mb}`;
+            document.getElementById('cloud').innerText = `${data.current.cloud}`;
+
+            // Set the city image
+
+            const cityImageSrc = await getCityImage(city);
+            document.getElementById('city-icon').src = cityImageSrc;
+            // const cityImage = `assets/${city}.jpeg`;
+            // document.getElementById('city-icon').src = cityImage;
+            // document.getElementById('city-icon').alt = `${city} Image`;
+            
+            // Set the weather icon
+            const iconUrl = `https:${data.current.condition.icon}`;
+            document.getElementById('weather-icon').src = iconUrl;
+            document.getElementById('weather-icon').alt = data.current.condition.text; // Accessible text for icon
+        }
+    } else {
+        console.error("City parameter not found in URL");
+    }
+}
+
+
+if (window.location.pathname.includes("index.html")) {
+    document.addEventListener("DOMContentLoaded", tableData);
+}
+
+
+
+if (window.location.pathname.includes("cityName.html")) {
+    loadCityDetails();
+}
