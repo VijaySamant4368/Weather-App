@@ -8,16 +8,16 @@ async function getWeather(city) {
             'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com'
         }
     };
-    
+
     try {
         // Fetch data from the API
         const response = await fetch(url, options);
-        
+
         // Check if the response is OK, otherwise throw an error
         if (!response.ok) {
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
-        
+
         // Parse the response as JSON
         const result = await response.json();
         return result; // Log the entire response or work with specific fields as needed
@@ -35,13 +35,13 @@ getWeather("goa");
 var data;
 async function tableData() {
 
-const cities=["New York", "Tokyo", "Paris", "Sydney", "Dubai"];
-for (const city of cities){
-    data =await getWeather(city);
-    const tableBody = document.querySelector("tbody");
+    const cities = ["New York", "Tokyo", "Paris", "Sydney", "Dubai"];
+    for (const city of cities) {
+        data = await getWeather(city);
+        const tableBody = document.querySelector("tbody");
 
-    // Add new row with the weather details
-    const row = `<tr>
+        // Add new row with the weather details
+        const row = `<tr>
     <td>${city}</td>
     <td>${data.location.lat}</td>
     <td>${data.location.lon}</td>
@@ -54,8 +54,8 @@ for (const city of cities){
     <td>${data.current.humidity}</td>
                 </tr>`;
 
-    tableBody.insertAdjacentHTML("beforeend", row);
-}
+        tableBody.insertAdjacentHTML("beforeend", row);
+    }
 }
 
 
@@ -66,7 +66,7 @@ async function getCityImage(city) {
 
     for (let ext of extensions) {
         imagePath = `assets/${city}.${ext}`;
-        
+
         // Attempt to load the image by setting it as the source
         const img = document.getElementById('city-icon');
         img.src = imagePath;
@@ -107,7 +107,7 @@ async function loadCityDetails() {
             // const cityImage = `assets/${city}.jpeg`;
             // document.getElementById('city-icon').src = cityImage;
             // document.getElementById('city-icon').alt = `${city} Image`;
-            
+
             // Set the weather icon
             const iconUrl = `https:${data.current.condition.icon}`;
             document.getElementById('weather-icon').src = iconUrl;
