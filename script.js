@@ -129,6 +129,13 @@ if (window.location.pathname.includes("cityName.html")) {
     loadCityDetails();
 }
 
+function searching(){
+    
+    const search=document.getElementById("search").value;
+    window.location.href=`cityName.html?city=${encodeURIComponent(search)}`;
+}
+
+
 
 // // Create a scene, camera, and renderer
 // const scene = new THREE.Scene();
