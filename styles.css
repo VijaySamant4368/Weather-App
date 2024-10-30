@@ -1,5 +1,6 @@
 body {
     background-color: rgb(151, 207, 233);
+    align-items: center;
 }
 
 h1 {
@@ -55,3 +56,86 @@ h1 {
 .card-main {
     width: 24rem;
 }
+.container{
+   color :white;
+    border:2px solid grey;
+    max-width:450px;
+    border-radius: 10px;
+    position:absolute;
+    top:0;
+
+    z-index:3;
+    background-color: rgba(77, 119, 132, 0.285) ;
+}
+#card-page-body{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cloud-icon circle {
+    fill: #ccc;
+    
+  }
+
+.svg{
+    margin:auto 20px;
+    padding :auto;
+    position:relative;
+    z-index: 0;
+}
+
+g {
+    animation: spin 3s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .sun {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    z-index: 2;
+}
+
+
+
+/* Define the animation */
+@keyframes move-clouds {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Apply the animation to the cloud SVGs */
+.cloud-icon {
+    position: relative;
+    top: 400px; /* Adjust this value to set initial vertical position */
+    animation: move-clouds 15s linear infinite;
+    opacity: 0.8; /* Optional: add slight transparency for a softer cloud look */
+}
+
+/* Apply different delays to each cloud to stagger their movements */
+.cloud-icon:nth-child(1) {
+    top: 300px;; /* Vertical position of the first cloud */
+    animation-delay: 0s;
+}
+
+.cloud-icon:nth-child(2) {
+    top: 100px; /* Vertical position of the second cloud */
+    animation-delay: 5s;
+}
+
+.cloud-icon:nth-child(3) {
+    top: 500px; /* Vertical position of the third cloud */
+    animation-delay: 10s;
+}
+

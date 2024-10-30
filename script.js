@@ -99,14 +99,14 @@ async function loadCityDetails() {
             document.getElementById('wind').innerText = `${data.current.wind_mph}`;
             document.getElementById('pressure').innerText = `${data.current.pressure_mb}`;
             document.getElementById('cloud').innerText = `${data.current.cloud}`;
+            document.getElementById('latitude').innerText = `${data.location.lat}`;
+            document.getElementById('longitude').innerText = `${data.location.lon}`;
+            document.getElementById('country').innerText = `${data.location.country}`;
 
             // Set the city image
 
             const cityImageSrc = await getCityImage(city);
-            document.getElementById('city-icon').src = cityImageSrc;
-            // const cityImage = `assets/${city}.jpeg`;
-            // document.getElementById('city-icon').src = cityImage;
-            // document.getElementById('city-icon').alt = `${city} Image`;
+            document.getElementById('city-icon').src = cityImageSrc
 
             // Set the weather icon
             const iconUrl = `https:${data.current.condition.icon}`;
@@ -128,3 +128,34 @@ if (window.location.pathname.includes("index.html")) {
 if (window.location.pathname.includes("cityName.html")) {
     loadCityDetails();
 }
+
+
+// // Create a scene, camera, and renderer
+// const scene = new THREE.Scene();
+// const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+// const renderer = new THREE.WebGLRenderer();
+// renderer.setSize(window.innerWidth, window.innerHeight);
+// document.body.appendChild(renderer.domElement);
+
+// // Load the model using GLTFLoader
+// const loader = new THREE.GLTFLoader();
+// loader.load(
+//   'assets/cloud.glb',
+//   (gltf) => {
+//     scene.add(gltf.scene);
+//   },
+//   undefined,
+//   (error) => {
+//     console.error('Error loading model:', error);
+//   }
+// );
+
+// // Set camera position
+// camera.position.z = 5;
+
+// // Animation loop to render the scene
+// function animate() {
+//   requestAnimationFrame(animate);
+//   renderer.render(scene, camera);
+// }
+// animate();
